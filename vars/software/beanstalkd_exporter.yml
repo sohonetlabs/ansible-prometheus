@@ -1,0 +1,24 @@
+---
+defaults:
+  port: 9371
+  tgroup: beanstalkd
+software:
+  name: messagebird/beanstalkd_exporter
+  release: 1.0.5
+  prerelease: null
+  url: https://github.com/messagebird/beanstalkd_exporter
+  source: https://github.com/messagebird/beanstalkd_exporter.git
+  updated: '2020-05-21T23:30:07.993693'
+  master:
+    commit:
+      sha: bf3768c65233ada33aedd65e2c4195ad1d323bb8
+      timestamp: '2020-06-15T12:49:00'
+    files: []
+  releases:
+    - name: 1.0.5
+      commit:
+        sha: 68e887fbb9af0c9727ea4c3b07fc31e37e81ab91
+        timestamp: '2020-04-03T12:24:00'
+      timestamp: '2020-04-03T16:29:00'
+      prerelease: false
+      files: []
