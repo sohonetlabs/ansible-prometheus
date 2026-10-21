@@ -20,7 +20,11 @@ jobs:
           bundle install
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
+        with:
+          # Compatibility lane for the role's Ansible 2.8-2.10 test matrix.
+          # Current Ansible/Python are covered by compatibility.yml.
+          python-version: "3.8"
 
       - name: Install dependencies
         run: |
@@ -33,7 +37,7 @@ jobs:
         run: pipenv run ansible --version
 
       - name: Run yamllint
-        run: yamllint --config-file=tests/yamllint.yml meta tasks vars
+        run: pipenv run yamllint --config-file=tests/yamllint.yml meta tasks vars
 
       - name: Ensure an inspec test exists for each software installation
         run: |
