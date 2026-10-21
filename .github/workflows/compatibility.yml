@@ -1,0 +1,17 @@
+name: Ansible compatibility
+on:
+  pull_request:
+  push:
+    branches: [beanstalkd_exporter]
+permissions:
+  contents: read
+jobs:
+  conditionals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - run: pip install 'ansible-core>=2.20,<2.21'
+      - run: python tests/check_conditions.py
