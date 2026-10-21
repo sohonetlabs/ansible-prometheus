@@ -52,16 +52,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pipenv --upgrade-strategy=only-if-needed
+          pip install netaddr six 'jinja2<3.1' 'markupsafe<2.1'
           if [ "${{ matrix.ansible }}" == "latest" ] ; then
-              pipenv install ansible
+              pip install ansible
           else
-              pipenv install ansible==${{ matrix.ansible }}
+              pip install ansible==${{ matrix.ansible }}
           fi
-          pipenv install
 
       - name: Show ansible version
-        run: pipenv run ansible --version
+        run: ansible --version
 
       - name: Run kitchen tests
         run: |
