@@ -41,8 +41,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Python 3.8 cannot run fixed pip. Use fixed uv and remove pip.
+          # Python 3.8 cannot run fixed pip; prevent ensurepip restoring it.
           uv pip uninstall --system pip
+          python -c 'import ensurepip, pathlib, shutil; shutil.rmtree(pathlib.Path(ensurepip.__file__).parent)'
+          python -c 'import importlib.util; assert importlib.util.find_spec("pip") is None; assert importlib.util.find_spec("ensurepip") is None'
           uv pip install --system "certifi>=2026.10.19"
           uv pip install --system 'ansible==2.10.7' 'ansible-base<2.11' 'ansible-lint==4.3.7' 'rich==10.12.0' yamllint netaddr six 'jinja2<3.1' 'markupsafe<2.1'
 
