@@ -3,7 +3,7 @@ name: Kitchen tests
 on: [push, pull_request]
 jobs:
   kitchen:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
     strategy:

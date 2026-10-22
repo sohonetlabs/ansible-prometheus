@@ -3,7 +3,7 @@ name: Validate Ansible
 on: [push, pull_request]
 jobs:
   validate_ansible:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
