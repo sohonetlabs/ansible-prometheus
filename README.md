@@ -46,7 +46,7 @@ See each exporter's usage page for more details:
 
 | Exporter                                                                                                     | Usage                                                        | Author               | CI tested |
 |--------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------:|:--------------------:|:---------:|
-|[389ds_exporter_terrycain](https://github.com/terrycain/389ds_exporter)                                       | [usage](docs/389ds_exporter_terrycain.md)                    | terrycain            | Yes       |
+|[389ds_exporter_terrycain](https://github.com/terricain/389ds_exporter)                                       | [usage](docs/389ds_exporter_terrycain.md)                    | terrycain            | Yes       |
 |[apache_exporter_lusitaniae](https://github.com/Lusitaniae/apache_exporter)                                   | [usage](docs/apache_exporter_lusitaniae.md)                  | Lusitaniae           | Yes       |
 |[aerospike_exporter_alicebob](https://github.com/alicebob/asprom)                                             | [usage](docs/aerospike_exporter_alicebob.md)                 | alicebob             | Yes       |
 |[bigip_exporter_expressenab](https://github.com/ExpressenAB/bigip_exporter)                                   | [usage](docs/bigip_exporter_expressenab.md)                  | ExpressenAB          | Yes       |
@@ -76,7 +76,7 @@ See each exporter's usage page for more details:
 |[memcached_exporter](https://github.com/prometheus/memcached_exporter)                                        | [usage](docs/memcached_exporter.md)                          | prometheus           | Yes       |
 |[mongodb_exporter_percona](https://github.com/percona/mongodb_exporter)                                       | [usage](docs/mongodb_exporter_percona.md)                    | percona              | Yes       |
 |[mysqld_exporter](https://github.com/prometheus/mysqld_exporter)                                              | [usage](docs/mysqld_exporter.md)                             | prometheus           | Partial   |
-|[nginx_exporter_nginxinc](https://github.com/nginxinc/nginx-prometheus-exporter)                              | [usage](docs/nginx_exporter_nginxinc.md)                     | nginxinc             | Partial   |
+|[nginx_exporter_nginxinc](https://github.com/nginx/nginx-prometheus-exporter)                              | [usage](docs/nginx_exporter_nginxinc.md)                     | nginxinc             | Partial   |
 |[node_exporter](https://github.com/prometheus/node_exporter)                                                  | [usage](docs/node_exporter.md)                               | prometheus           | Yes       |
 |[ntp_exporter_sapcc](https://github.com/sapcc/ntp_exporter)                                                   | [usage](docs/ntp_exporter_sapcc.md)                          | sapcc                | Yes       |
 |[nvidia_exporter_bugroger](https://github.com/BugRoger/nvidia-exporter)                                       | [usage](docs/nvidia_exporter_bugroger.md)                    | BugRoger             | Partial   |
@@ -104,7 +104,7 @@ Numerous node_exporter textfiles scripts are supported and can be installed via 
 
 | node_exporter textfiles script                                                                                                           | Source                     | Enable variable                           |
 |------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|--------------------------------------------|
-|[apt.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/apt.sh)                             | node_exporter examples     | prometheus_script_apt: true                |
+|[apt.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/8eeeffb362c31af4427b21a84e2ef6cbdddfd0c3/apt.sh)                             | node_exporter examples     | prometheus_script_apt: true                |
 |[btrfs_stats.py](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/btrfs_stats.py)             | node_exporter examples     | prometheus_script_btrfs_stats: true        |
 |[deleted_libraries.py](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/deleted_libraries.py) | node_exporter examples     | prometheus_script_deleted_libraries: true  |
 |[directory-size.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/directory-size.sh)       | node_exporter examples     | prometheus_script_directory_size: true     |
@@ -116,7 +116,7 @@ Numerous node_exporter textfiles scripts are supported and can be installed via 
 |[mellanox_hca_temp](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/mellanox_hca_temp)       | node_exporter examples     | prometheus_script_mellanox_hca_temp: true  |
 |[multipathd_info](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/multipathd_info)           | node_exporter examples     | prometheus_script_multipathd_info: true    |
 |[ntpd_metrics.py](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/ntpd_metrics.py)           | node_exporter examples     | prometheus_script_ntpd_metrics: true       |
-|[nvme_metrics.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/nvme_metrics.sh)           | node_exporter examples     | prometheus_script_nvme_metrics: true       |
+|[nvme_metrics.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/8eeeffb362c31af4427b21a84e2ef6cbdddfd0c3/nvme_metrics.sh)           | node_exporter examples     | prometheus_script_nvme_metrics: true       |
 |[pacman.sh](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/pacman.sh)                       | node_exporter examples     | prometheus_script_pacman: true             |
 |[promcron.sh](https://github.com/mesaguy/ansible-prometheus/blob/master/scripts/promcron.sh)                                              | mesaguy/ansible-prometheus | prometheus_script_promcron: true           |
 |[promrun.sh](https://github.com/mesaguy/ansible-prometheus/blob/master/scripts/promrun.sh)                                                | mesaguy/ansible-prometheus | prometheus_script_promrun: true            |
@@ -581,7 +581,7 @@ All daemons are run via a non-privileged 'prometheus' user by default.
 
 When Prometheus software is installed using source code, the installation destination directory is named for both the Prometheus software version and the Go compiler version. This naming convention ensures that the use of newer versions of the Go compiler force a rebuild of the Prometheus modules build from source. This naming convention also differentiate installations by binary versus installations by compiled source. Forcing Prometheus source rebuilds each time a new version of Go is released has the negative of introducing more work by the clients, but have the benefit of ensuring that and vulnerabilities within the Go core libraries are patched. We assume that Prometheus software that is provided in binary form is monitored for vulnerabilities by the developer and rebuilt as necessary.
 
-Future: When source is compiled, all compile commands are executed using an unprivileged user account. This combined with running daemons as an unprivileged user mitigates many security risks. -- This is currently complicated by limits with [become](https://docs.ansible.com/ansible/latest/user_guide/become.html)
+Future: When source is compiled, all compile commands are executed using an unprivileged user account. This combined with running daemons as an unprivileged user mitigates many security risks. -- This is currently complicated by limits with [become](https://github.com/ansible/ansible-documentation/blob/devel/docs/docsite/rst/playbook_guide/playbooks_privilege_escalation.rst)
 
 ## License
 MIT

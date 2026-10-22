@@ -7,6 +7,8 @@
 - name: Starting beanstalkd_exporter install
   set_fact:
     prometheus_exporter: true
+    # The pinned upstream release has no binary assets; exercise its source build.
+    prometheus_software_allow_build_test: true
     prometheus_software_author: prometheus
     prometheus_software_binary_name: beanstalkd_exporter
     prometheus_software_makefile_make_command: 'go get -d && go build'

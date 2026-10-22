@@ -1,6 +1,6 @@
 # nginx exporter (nginxinc) configuration
 
-To enable [nginx_exporter by nginxinc](https://github.com/nginxinc/nginx-prometheus-exporter) include role task: nginx_exporter_nginxinc
+To enable [nginx_exporter by nginxinc](https://github.com/nginx/nginx-prometheus-exporter) include role task: nginx_exporter_nginxinc
 
 An array of additional flags to pass to the nginx_exporter daemon (ie):
 

@@ -5,7 +5,7 @@
 
 - name: 'Create managed tgroup directory: {{ prometheus_managed_tgroup_dir }}'
   become: true
-  delegate_to: '{{ prometheus_server_name }}'
+  delegate_to: '{{ prometheus_server_name | default(inventory_hostname) }}'
   run_once: true
   file:
     path: '{{ prometheus_managed_tgroup_dir }}'

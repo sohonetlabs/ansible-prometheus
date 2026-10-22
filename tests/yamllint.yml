@@ -2,6 +2,8 @@
 extends: default
 
 rules:
+  indentation:
+    indent-sequences: whatever
   # Match Ansible Galaxy's expectations
   line-length:
     max: 160
