@@ -22,6 +22,7 @@ cases = [
 ]
 # Exercise the other non-boolean selectors reached by exporter installs.
 selectors = [
+    ("_service.yml", "prometheus_software_port_num", [9100, "9100", 0, ""], [True, True, False, False]),
     ("_setup_software_facts.yml", "prometheus_software_default_prerelease", ["v1.2.0-rc1", None, False, ""], [True, False, False, False]),
     ("_install_from_binary.yml", "prometheus_software_archive_file", ["node.tar.gz", "node.zip"], [True, False]),
     ("_service.yml", "prometheus_software_env_vars", [{"PATH": "/bin"}, {}], [True, False]),
