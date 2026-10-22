@@ -5,6 +5,8 @@ jobs:
   kitchen:
     runs-on: ubuntu-24.04
     env:
+      # kitchen-docker 2.10 parses the legacy builder image ID output.
+      DOCKER_BUILDKIT: "0"
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
     strategy:
       matrix:
