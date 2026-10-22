@@ -67,3 +67,10 @@ jobs:
           mkdir -m 0700 -p .kitchen
           if ! [ -f ".kitchen/docker_id_rsa" ] ; then ssh-keygen -f .kitchen/docker_id_rsa -t rsa -N ''; fi
           bundle exec kitchen test default-centos-83
+
+      - name: Show kitchen failure diagnostics
+        if: failure()
+        run: |
+          for log in .kitchen/logs/*.log; do
+            test ! -f "$log" || tail -n 100 "$log"
+          done
