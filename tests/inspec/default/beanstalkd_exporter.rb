@@ -34,5 +34,6 @@ end
 
 describe http('http://127.0.0.1:9371/metrics') do
     its('status') { should cmp 200 }
-    its('body') { should match /go_goroutines/ }
+    # This exporter uses a custom registry without the default Go collectors.
+    its('body') { should match /^beanstalkd_exporter_loaded_mappings_count \d+$/ }
 end
