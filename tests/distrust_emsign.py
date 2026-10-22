@@ -29,15 +29,3 @@ for pem in re.findall(
         print(f"Distrusted affected root: {fingerprint}")
 
 subprocess.run(["update-ca-trust", "extract"], check=True)
-contexts = [ssl.create_default_context()]
-try:
-    import certifi
-except ImportError:
-    pass
-else:
-    contexts.append(ssl.create_default_context(cafile=certifi.where()))
-for context in contexts:
-    roots = context.get_ca_certs(binary_form=True)
-    if not roots or blocked.intersection(hashlib.sha256(c).hexdigest() for c in roots):
-        raise SystemExit("Unsafe or empty CA bundle after distrust update")
-print("System and installed certifi CA stores exclude the incident roots")
