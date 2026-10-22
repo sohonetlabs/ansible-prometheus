@@ -6,7 +6,7 @@ The [jmx_exporter](https://github.com/prometheus/jmx_exporter) is different from
 
 Normal usage of this exporter has two or three steps:
 
-1. (Optional) configure an exporter configuration file, examples are found in the [jmx_exporter examples](https://github.com/prometheus/jmx_exporter/tree/master/example_configs)
+1. (Optional) configure an exporter configuration file, examples are found in the [jmx_exporter examples](https://github.com/prometheus/jmx_exporter/tree/main/example_configs)
 2. Update the java run parameters to include the jmx JAR, see [jmx_exporter](https://github.com/prometheus/jmx_exporter):
 
     java -javaagent: -javaagent:/opt/prometheus/exporters/jmx_exporter/active/jmx_exporter.jar=18888:/opt/prometheus/etc/jmx_exporter.default.yml -jar yourJar.jar
