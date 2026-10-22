@@ -85,6 +85,8 @@ jobs:
       - name: Show kitchen failure diagnostics
         if: failure()
         run: |
+          docker ps -a
+          for container in $(docker ps -aq); do docker logs "$container"; done
           for log in .kitchen/logs/*.log; do
             test ! -f "$log" || tail -n 100 "$log"
           done
