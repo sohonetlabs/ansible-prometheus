@@ -20,6 +20,28 @@ cases = [
     (source, {"prometheus_software_src_url": ""}, False),
     (source, {}, False),
 ]
+# Exercise the other non-boolean selectors reached by exporter installs.
+selectors = [
+    ("_install_from_binary.yml", "prometheus_software_archive_file", ["node.tar.gz", "node.zip"], [True, False]),
+    ("_service.yml", "prometheus_software_env_vars", [{"PATH": "/bin"}, {}], [True, False]),
+    ("_setup_capabilities.yml", "prometheus_software_capabilities", [{"node": ["cap_net_raw+ep"]}, {}], [True, False]),
+    ("_install_capabilities.yml", "prometheus_capabilites_packages", [["libcap2-bin"], []], [True, False]),
+    ("_install_go_compiler.yml", "present_go_paths.files", [[{"path": "/go/old"}], []], [True, False]),
+]
+def conditions_in(tasks):
+    for task in tasks:
+        conditions = task.get("when", [])
+        yield from ([conditions] if isinstance(conditions, str) else conditions)
+        for key in ["block", "rescue", "always"]:
+            yield from conditions_in(task.get(key, []))
+for filename, variable, values, expected_values in selectors:
+    expressions = list(conditions_in(yaml.safe_load((root / "tasks" / filename).read_text())))
+    expression = next(c for c in expressions if variable + " |" in c or variable + " is defined and" in c or variable + " is search" in c)
+    for value, expected in zip(values, expected_values):
+        variables = {variable: value}
+        if variable == "present_go_paths.files":
+            variables = {"present_go_paths": {"files": value}}
+        cases.append((expression, variables, expected))
 for i, (condition, variables, expected) in enumerate(cases):
     plays.append({
         "name": f"case {i}", "hosts": "localhost", "gather_facts": False,

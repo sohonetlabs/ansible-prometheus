@@ -164,7 +164,7 @@
   when:
     - not prometheus_software_installed.stat.exists
     - prometheus_software_download is succeeded
-    - prometheus_software_archive_file | regex_search('.*(tar.gz)$', ignorecase=True)
+    - prometheus_software_archive_file is search('.*(tar.gz)$', ignorecase=True)
 
 - name: 'Unarchive {{ prometheus_software_name_version }} ({{ prometheus_software_archive_file }})'
   become: true
