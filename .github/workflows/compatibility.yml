@@ -15,3 +15,4 @@ jobs:
           python-version: "3.14"
       - run: pip install 'ansible-core>=2.20,<2.21'
       - run: python tests/check_conditions.py
+      - run: python tests/check_archive.py
