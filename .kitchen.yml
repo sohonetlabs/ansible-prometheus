@@ -263,10 +263,6 @@ platforms:
 
   - name: centos-8.3
     driver_config:
-      # systemd 239 needs a writable host cgroup namespace on modern runners.
-      run_options: '--cgroupns=host'
-      volume:
-        - '/sys/fs/cgroup:/sys/fs/cgroup:rw'
       build_options:
         build-arg:
           - DOCKER_IMAGE_NAME=mesaguy/centos-8.3-kitchen-ansible-x86_64:latest

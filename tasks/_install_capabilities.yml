@@ -8,7 +8,7 @@
   retries: 5
   delay: 10
   until: prometheus_capabilities_packages_install is succeeded
-  when: prometheus_capabilites_packages is defined and prometheus_capabilites_packages | length > 0
+  when: prometheus_capabilites_packages is defined and prometheus_capabilites_packages
 
 - name: Search for 'setcap' capabilities binary
   shell: which setcap  # noqa 305

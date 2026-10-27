@@ -1,6 +1,6 @@
 # 389ds exporter (terrycain) configuration
 
-To enable [389ds_exporter by terrycain](https://github.com/terricain/389ds_exporter) include role task: 389ds_exporter_terrycain
+To enable [389ds_exporter by terrycain](https://github.com/terrycain/389ds_exporter) include role task: 389ds_exporter_terrycain
 
 :warning: Your LDAP password is given to the exporter as a command line argument and is visible to all via 'ps', etc. This exporter does not support storing the LDAP password in a configuration file. If access to the 389ds server is sufficiently limited, then this security exposure is reduced, but still present.
 

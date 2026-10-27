@@ -65,7 +65,7 @@
       run_once: true
       get_url:
         dest: '{{ prometheus_local_archive_dir }}/golang/{{ prometheus_go_version }}/{{ prometheus_go_archive_name }}'
-        url: 'https://dl.google.com/go/{{ prometheus_go_archive_name }}'
+        url: 'https://storage.googleapis.com/golang/{{ prometheus_go_archive_name }}'
       register: prometheus_download
       retries: 5
       delay: 10
@@ -112,7 +112,7 @@
     extra_opts:
       - '--strip-components=1'
     creates: '{{ prometheus_go_dir }}/{{ prometheus_go_version }}/bin/go'
-    src: 'https://dl.google.com/go/{{ prometheus_go_archive_name }}'
+    src: 'https://storage.googleapis.com/golang/{{ prometheus_go_archive_name }}'
     dest: '{{ prometheus_go_dir }}/{{ prometheus_go_version }}'
     mode: 0755
     owner: root
@@ -148,7 +148,7 @@
       with_items: '{{ present_go_paths.files }}'
       loop_control:
         loop_var: prometheus_cleanup_go_item
-      when: present_go_paths.files | length > 0
+      when: present_go_paths.files
   when: prometheus_purge_orphans | bool
 
 - name: Define 'install_go_compiler' run as complete

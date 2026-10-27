@@ -1,7 +1,7 @@
 ---
 # This task must be run before any action and should only be run once
 - name: Gather Operating System specific variables
-  include_vars: '{{ os_var_file }}'
+  ansible.builtin.include_vars: '{{ os_var_file }}'
   loop_control:
     loop_var: os_var_file
   with_first_found:
@@ -14,16 +14,16 @@
 
 - block:
     - name: Include role mesaguy.prometheus setup package manager
-      include_tasks: '_setup_pkg_mgr_{{ ansible_os_family }}.yml'
+      ansible.builtin.include_tasks: '_setup_pkg_mgr_{{ ansible_os_family }}.yml'
       when: ansible_os_family in prometheus_software_setup_pkg_mgrs
 
     - name: Define package manager as setup
-      set_fact:
+      ansible.builtin.set_fact:
         prometheus_setup_pkg_mgr_executed: true
 
     - name: Install prometheus prerequisite utilities
       become: true
-      package:
+      ansible.builtin.package:
         name: '{{ prometheus_prerequisite_packages }}'
         state: present
       register: prometheus_prerequisite_packages_install
@@ -35,10 +35,10 @@
         - prometheus_prerequisite_packages_install is undefined
 
     - name: Include task to install and locate sponge
-      include_tasks: _install_sponge.yml
+      ansible.builtin.include_tasks: _install_sponge.yml
 
     - name: Warn that 'sponge' cannot be installed
-      debug:
+      ansible.builtin.debug:
         msg: "'sponge' cannot be installed because no 'prometheus_sponge_packages' variable has been defined"
       when: prometheus_sponge_packages is undefined
 
@@ -46,7 +46,7 @@
 
 - name: Add group "{{ prometheus_group }}"
   become: true
-  group:
+  ansible.builtin.group:
     name: '{{ prometheus_group }}'
     system: '{{ prometheus_group_is_system }}'
     gid: '{{ prometheus_gid | default(omit) }}'
@@ -54,7 +54,7 @@
 
 - name: Add user "{{ prometheus_user }}"
   become: true
-  user:
+  ansible.builtin.user:
     name: '{{ prometheus_user }}'
     comment: Prometheus User
     uid: '{{ prometheus_uid | default(omit) }}'
@@ -65,7 +65,7 @@
 
 - name: 'Setup prometheus install root directory: "{{ prometheus_root_dir }}"'
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ prometheus_root_dir }}'
     state: directory
     mode: 0755
@@ -74,7 +74,7 @@
 
 - name: Setup prometheus base directories owned by "root"
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ root_base_directory }}'
     state: directory
     mode: 0755
@@ -88,7 +88,7 @@
     - '{{ prometheus_script_directory }}'
 
 - name: Include task purge old prometheus etc file backups
-  include_tasks: _purge_files.yml
+  ansible.builtin.include_tasks: _purge_files.yml
   vars:
     prometheus_purge_files_age: '{{ prometheus_etc_backup_max_age }}'
     prometheus_purge_files_patterns:
@@ -98,7 +98,7 @@
 
 - name: Link {{ prometheus_etc_dir }} to /etc/prometheus (Optional)
   become: true
-  file:
+  ansible.builtin.file:
     src: '{{ prometheus_etc_dir }}'
     dest: '/etc/prometheus'
     owner: root
@@ -111,7 +111,7 @@
 
 - name: 'Setup prometheus base directories owned by "{{ prometheus_user }}"'
   become: true
-  file:
+  ansible.builtin.file:
     path: '{{ prometheus_base_directory }}'
     state: directory
     mode: 0755
