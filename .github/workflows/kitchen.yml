@@ -58,23 +58,14 @@ jobs:
           sudo mkdir -p /usr/libexec
           sudo ln -s /usr/bin/python /usr/libexec/platform-python
 
-      - uses: astral-sh/setup-uv@v7
-        with:
-          version: "0.13.5"
-      - name: Refresh system certificates
-        run: sudo apt-get update && sudo apt-get install -y ca-certificates
-
       - name: Install dependencies
         run: |
-          # Python 3.8 cannot run fixed pip; prevent ensurepip restoring it.
-          uv pip uninstall --system pip
-          python -c 'import ensurepip, pathlib, shutil; shutil.rmtree(pathlib.Path(ensurepip.__file__).parent)'
-          uv pip install --system "certifi>=2026.10.19"
-          uv pip install --system netaddr six 'jinja2<3.1' 'markupsafe<2.1'
+          python -m pip install --upgrade pip setuptools wheel
+          pip install netaddr six 'jinja2<3.1' 'markupsafe<2.1'
           if [ "${{ matrix.ansible }}" == "latest" ] ; then
-              uv pip install --system ansible
+              pip install ansible
           else
-              uv pip install --system ansible==${{ matrix.ansible }}
+              pip install ansible==${{ matrix.ansible }}
           fi
 
       - name: Show ansible version

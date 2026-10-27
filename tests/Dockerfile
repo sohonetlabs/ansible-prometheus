@@ -8,12 +8,6 @@ RUN if [ -f /etc/centos-release ] && grep -q 'release 8' /etc/centos-release; th
         /etc/yum.repos.d/CentOS-Linux-*.repo; \
     fi
 
-# Archived CentOS CA packages still contain incident roots.
-COPY tests/distrust_emsign.py /tmp/distrust_emsign.py
-RUN if [ -x /usr/libexec/platform-python ] && [ -f /etc/centos-release ]; then \
-      /usr/libexec/platform-python /tmp/distrust_emsign.py; \
-    fi && rm /tmp/distrust_emsign.py
-
 # Add your specific Ansible SSH public key. This only works when run via
 # kitchen, when run with the following options in your .kitchen.yml file:
 #
